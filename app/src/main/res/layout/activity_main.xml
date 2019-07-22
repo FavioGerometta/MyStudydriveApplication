@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight = "9"/>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:layout_weight = "1"
+            android:background="@color/colorPrimaryDark">
+
+            <Button
+                android:id="@+id/producer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="New Producer"
+                android:textColor="#ffffff"
+                android:textSize="15sp"
+                android:background="@color/colorPrimary"
+                android:layout_margin="4sp"/>
+
+            <Button
+                android:id="@+id/consumer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="New Consumer"
+                android:textColor="#ffffff"
+                android:textSize="15sp"
+                android:background="@color/colorPrimary"
+                android:layout_margin="4sp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>
