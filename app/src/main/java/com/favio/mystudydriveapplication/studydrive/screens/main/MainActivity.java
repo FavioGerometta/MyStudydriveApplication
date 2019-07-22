@@ -22,12 +22,11 @@ import javax.inject.Inject;
 
 public class MainActivity extends BaseActivity<MainViewModel> {
 
-    private List<MyItem> currencies = new ArrayList<>();
+    private List<MyItem> myitems = new ArrayList<>();
     private ActivityMainBinding binding;
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     Button button;
-
 
     @Inject
     MainViewModel viewModel;
@@ -42,13 +41,11 @@ public class MainActivity extends BaseActivity<MainViewModel> {
         super.onCreate(savedInstanceState);
         initBinding();
         initRecyclerView();
-        //initSubject(); TODO: better perhaps to use subjects here in the future
-        //getRates();
         this.setTitle("A test from Studydrive");
     }
 
     private void initRecyclerView() {
-        adapter = new MyAdapter(this, currencies ,getViewModel());
+        adapter = new MyAdapter(this, myitems,getViewModel());
         recyclerView = binding.recycler;
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

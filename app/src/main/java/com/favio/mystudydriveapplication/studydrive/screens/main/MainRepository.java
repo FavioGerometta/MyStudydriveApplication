@@ -27,7 +27,7 @@ public class MainRepository {
     @Inject
     public MainRepository() {}
 
-    public void fetchRates(String type) {
+    public void fetchLatest(String type) {
         observableCount++;
         Observable<List<MyItem>> observable = Observable.fromArray(list);
         int seconds = 3;
@@ -49,7 +49,7 @@ public class MainRepository {
                     public void onNext(List<MyItem> modifiedItems) {
                         if(Constants.PRODUCER.equals(type)) {
 
-                            modifiedItems.add(new MyItem("Item: "+String.valueOf(CountHelper.getLast()) + " Observable: " + number.toString()));
+                            modifiedItems.add(new MyItem("Item: "+CountHelper.getLast() + " Observable: " + number.toString()));
                         }
                         else if(modifiedItems.size()>0){
                             modifiedItems.remove(0);
@@ -63,14 +63,14 @@ public class MainRepository {
 
                     @Override
                     public void onComplete() {
-                        //getLatestCalculatedRates();
+
                     }
                 });
     }
 
 
-    public MutableLiveData<List<MyItem>> getLatestCalculatedRates(String type) {
-        fetchRates(type);
+    public MutableLiveData<List<MyItem>> getLatestData(String type) {
+        fetchLatest(type);
         return mutableLiveData;
     }
 

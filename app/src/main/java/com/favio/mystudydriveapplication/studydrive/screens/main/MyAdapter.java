@@ -14,40 +14,39 @@ import com.favio.mystudydriveapplication.R;
 import com.favio.mystudydriveapplication.databinding.MyItemBinding;
 import com.favio.mystudydriveapplication.studydrive.model.MyItem;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RateViewHolder> {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 
     private Context context;
-    List<MyItem> currencies;
+    List<MyItem> items;
     MainViewModel viewModel;
     RecyclerView recyclerView;
 
 
     @Inject
-    public MyAdapter(Context context, List<MyItem> currencies, MainViewModel viewModel) {
+    public MyAdapter(Context context, List<MyItem> items, MainViewModel viewModel) {
         this.context = context;
-        this.currencies = currencies;
+        this.items = items;
         this.viewModel = viewModel;
 
     }
 
     @NonNull
     @Override
-    public RateViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.my_item,
                 viewGroup, false);
-        return new RateViewHolder(view);
+        return new ItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RateViewHolder holder, int position) {
-        MyItem currency = currencies.get(position);
-        holder.getBinding().description.setText(currency.getDescription());
+    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+        MyItem item = items.get(position);
+        holder.getBinding().description.setText(item.getDescription());
     }
 
     @Override
@@ -56,23 +55,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RateViewHolder> {
         this.recyclerView = recyclerView;
     }
 
-    public String formatToPresicionTwo(float number) {
-        DecimalFormat formatter = new DecimalFormat("0.00");
-        return formatter.format(number);
-    }
-
     @Override
     public int getItemCount() {
-        return currencies.size();
+        return items.size();
     }
 
     public void updateData(List<MyItem> value) {
-        if (currencies != null && value != null && currencies.size() == value.size()) {
+        if (items != null && value != null && items.size() == value.size()) {
             updateRateListItems(value);
             recyclerView.getRecycledViewPool().clear();
             notifyDataSetChanged();
         } else {
-            currencies = value;
+            items = value;
             recyclerView.getRecycledViewPool().clear();
             notifyDataSetChanged();
         }
@@ -81,17 +75,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RateViewHolder> {
     public void updateRateListItems(List<MyItem> value) {
         List<MyItem> c = new ArrayList<>();
         c.addAll(value);
-        DiffUtil.Callback diffCallback = new ItemsDiffCallback(currencies, c);
+        DiffUtil.Callback diffCallback = new ItemsDiffCallback(items, c);
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-        this.currencies.clear();
-        this.currencies.addAll(c);
+        this.items.clear();
+        this.items.addAll(c);
         diffResult.dispatchUpdatesTo(this);
     }
 
-    public class RateViewHolder extends RecyclerView.ViewHolder {
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
         private MyItemBinding binding;
 
-        public RateViewHolder(@NonNull View itemView) {
+        public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
         }

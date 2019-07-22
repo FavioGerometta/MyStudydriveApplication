@@ -11,8 +11,7 @@ import javax.inject.Inject;
 
 
 public class MainViewModel extends ViewModel {//AndroidViewModel { do I need application context here?
-    private MyItem currentCurrency;
-
+    
     public MainRepository repository;
 
 
@@ -23,7 +22,7 @@ public class MainViewModel extends ViewModel {//AndroidViewModel { do I need app
     }
 
     public LiveData<List<MyItem>> getRates(String type) {
-        return this.repository.getLatestCalculatedRates(type);
+        return this.repository.getLatestData(type);
     }
 
 
