@@ -1,5 +1,5 @@
 # MyStudydriveApplication
-I had to create this app as part of the recruiting process for the company Studydrive.
+Task to test consumers/producers in Android
 
 ## Test-Project
 
